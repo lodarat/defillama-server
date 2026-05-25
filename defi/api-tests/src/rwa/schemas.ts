@@ -26,14 +26,15 @@ export const rwaCurrentResponseSchema = z.array(rwaItemSchema);
 
 // ============================================================================
 // RWA List Schema (from /list endpoint)
-// Returns an object with tickers, platforms, chains, categories, idMap
+// Returns an object with canonicalMarketIds, platforms, chains, categories, assetGroups, idMap
 // ============================================================================
 
 export const rwaListResponseSchema = z.object({
-  tickers: z.array(z.string()),
+  canonicalMarketIds: z.array(z.string()),
   platforms: z.array(z.string()),
   chains: z.array(z.string()),
   categories: z.array(z.string()),
+  assetGroups: z.array(z.string()),
   idMap: z.record(z.string(), z.union([z.string(), z.number()])),
 }).passthrough();
 
@@ -76,4 +77,16 @@ export const rwaBreakdownChartResponseSchema = z.array(rwaBreakdownChartPointSch
 
 export const rwaFilterResponseSchema = z.object({
   data: z.array(rwaItemSchema),
+}).passthrough();
+
+// ============================================================================
+// RWA Flows Schema (from /flows/:id endpoint)
+// Net flow = (supply_t - supply_start) * price_t per chain
+// ============================================================================
+
+export const rwaFlowsResponseSchema = z.object({
+  id: z.union([z.string(), z.number()]),
+  start: z.number(),
+  end: z.number(),
+  data: z.array(z.object({ timestamp: z.number() }).passthrough()),
 }).passthrough();

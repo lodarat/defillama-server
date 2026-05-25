@@ -9,7 +9,15 @@ export const deadChains = [
   'saga', // chain paused after the hack
   'vision',
   'kinto', // chain is dead,
-  'inevm'
+  'inevm',
+  'soon_base', // dead?
+  'fluence',
+  'zksync',  // zksync lite, deprecated in favor of zksync era, which is still active
+  'sx',  // deprecated in favor of sx rollup?
+  'titan',  // https://tokenize.exchange/ the entity behind it is insolvent?
+  'mint', // shutdown 2026-04-17: https://x.com/Mint_Blockchain/status/2044980026819617147
+  'evmos', // shutdown 2026-05-18: https://x.com/Disperze_/status/2054625049429127192
+  'redstone', // shutdown 2026-05-18: https://x.com/redstonexyz/status/2055181780043579468
 ]
 
 

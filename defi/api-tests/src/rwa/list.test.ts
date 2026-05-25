@@ -8,6 +8,7 @@ import {
   expectNonEmptyArray,
 } from '../../utils/testHelpers';
 import { validate } from '../../utils/validation';
+import { expectCorsHeaders } from '../../utils/corsHelpers';
 
 const apiClient = createApiClient(endpoints.RWA.BASE_URL);
 
@@ -19,6 +20,10 @@ describe('RWA API - List', () => {
   });
 
   describe('Basic Response Validation', () => {
+    it('should expose CORS headers', () => {
+      expectCorsHeaders(response);
+    });
+
     it('should return successful response with valid structure', () => {
       expectSuccessfulResponse(response);
       expectObjectResponse(response);
@@ -33,11 +38,11 @@ describe('RWA API - List', () => {
       }
     });
 
-    it('should have non-empty tickers array', () => {
-      expectNonEmptyArray(response.data.tickers);
-      response.data.tickers.slice(0, 10).forEach((ticker) => {
-        expect(typeof ticker).toBe('string');
-        expect(ticker.length).toBeGreaterThan(0);
+    it('should have non-empty canonicalMarketIds array', () => {
+      expectNonEmptyArray(response.data.canonicalMarketIds);
+      response.data.canonicalMarketIds.slice(0, 10).forEach((id) => {
+        expect(typeof id).toBe('string');
+        expect(id.length).toBeGreaterThan(0);
       });
     });
 
@@ -51,6 +56,10 @@ describe('RWA API - List', () => {
 
     it('should have non-empty categories array', () => {
       expectNonEmptyArray(response.data.categories);
+    });
+
+    it('should have non-empty assetGroups array', () => {
+      expectNonEmptyArray(response.data.assetGroups);
     });
 
     it('should have non-empty idMap', () => {
